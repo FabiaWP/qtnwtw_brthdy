@@ -12,6 +12,7 @@ define('TWR_USINCK_BASENAME', basename(TWR_USINCK));
 define('TWR_USINCK_URL', plugins_url() . '/' . TWR_USINCK);
 
 //include "functions.php";
+include("userBirthdayRetriever.php");
 
 class TWR_USINCK
 {
@@ -36,52 +37,9 @@ add_action('admin_menu', 'global_user_info_checker');
 
 function global_user_info_checker()
 {
-    add_users_page('User Info Checker', 'User Info Checker', 'manage_options', 'checker','birthday_user_checker');
+    add_users_page('User Info Checker', 'User Info Checker', 'manage_options', 'checker','generate_page');
 }
 
-function birthday_user_checker()
-{
-    $currentMonthAndDay   = date("m-d");
-    global $wpdb;
-    $todayResults = $wpdb->get_results( "SELECT * FROM `wp_usermeta` WHERE `meta_key` LIKE 'birthdate' AND `meta_value` RLIKE '".$currentMonthAndDay."'" );
-    $counter = 1;
-    foreach($todayResults as $result){
-        $content = $content .'<br>'. $counter.') Id utente: '.$result->user_id;
-        $counter = $counter + 1;
-    }
-    ?>
-    <div class="wrap">
-        <h2>Prossimi compleanni</h2>
-    </div>
-    <div class="" > <h3> Ci sono <?php echo $counter-1; ?> utenti che compiono gli anni oggi! </h3> </div>
-    <div class="" > <p> <?php echo $content; ?> </p> </div>
-
-    <?php
-
-    $tomorrowMonthAndDay = date("m-d", strtotime("+1 day"));
-
-    $tomorrowResults = $wpdb->get_results( "SELECT * FROM `wp_usermeta` WHERE `meta_key` LIKE 'birthdate' AND `meta_value` RLIKE '".$tomorrowMonthAndDay."'" );
-    $$tomorrowResultscounter = 1;
-
-
-    foreach($tomorrowResults as $result){
-        $tommorrowUsers = $tomorrowUsers .'<br>'. $counter.') Id utente: '.$result->user_id;
-        $$tomorrowResultscounter = $$tomorrowResultscounter + 1;
-    }
-
-    ?>
-    <div class="wrap">
-        <div class="" > <h3> Ci sono <?php echo $$tomorrowResultscounter-1; ?> utenti che compiono gli anni domani! </h3> </div>
-
-    </div>
-    <div class="" > <p> <?php echo $tommorrowUsers; ?> </p> </div>
-    <?php
-
-
-
-    ?>
-
-
-    <?php
-
+function generate_page(){
+    return retrieveBirthdays();
 }
