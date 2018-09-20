@@ -61,17 +61,17 @@ function birthday_user_checker()
     $tomorrowMonthAndDay = date("m-d", strtotime("+1 day"));
 
     $tomorrowResults = $wpdb->get_results( "SELECT * FROM `wp_usermeta` WHERE `meta_key` LIKE 'birthdate' AND `meta_value` RLIKE '".$tomorrowMonthAndDay."'" );
-    $counter = 1;
+    $$tomorrowResultscounter = 1;
 
 
     foreach($tomorrowResults as $result){
         $tommorrowUsers = $tomorrowUsers .'<br>'. $counter.') Id utente: '.$result->user_id;
-        $counter = $counter + 1;
+        $$tomorrowResultscounter = $$tomorrowResultscounter + 1;
     }
 
     ?>
     <div class="wrap">
-        <div class="" > <h3> Ci sono <?php echo $counter-1; ?> utenti che compiono gli anni domani! </h3> </div>
+        <div class="" > <h3> Ci sono <?php echo $$tomorrowResultscounter-1; ?> utenti che compiono gli anni domani! </h3> </div>
 
     </div>
     <div class="" > <p> <?php echo $tommorrowUsers; ?> </p> </div>
