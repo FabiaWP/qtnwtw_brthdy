@@ -11,6 +11,8 @@ define('TWR_USINCK', dirname(__FILE__));
 define('TWR_USINCK_BASENAME', basename(TWR_USINCK));
 define('TWR_USINCK_URL', plugins_url() . '/' . TWR_USINCK);
 
+//include "functions.php";
+
 class TWR_USINCK
 {
     /**
