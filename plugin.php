@@ -51,9 +51,12 @@ function birthday_user_checker()
     <div class="wrap">
         <h2>Prossimi compleanni</h2>
     </div>
-    <div class="" > <h3> Ci sono <?php echo $counter-1; ?> utenti che stanno per compiere gli anni! </h3> </div>
+    <div class="" > <h3> Ci sono <?php echo $counter-1; ?> utenti che compiono gli anni oggi! </h3> </div>
     <div class="" > <p> <?php echo $content; ?> </p> </div>
-    <?php
 
+    <div class="wrap">
+        <h2>Nel corso della prossima settimana i seguenti utenti compieranno gli anni.</h2>
+    </div>
+    <?php
 
 }
