@@ -41,9 +41,9 @@ function birthday_user_checker()
 {
     $currentMonthAndDay   = date("m-d");
     global $wpdb;
-    $results = $wpdb->get_results( "SELECT * FROM `wp_usermeta` WHERE `meta_key` LIKE 'birthdate' AND `meta_value` RLIKE '".$currentMonthAndDay."'" );
+    $todayResults = $wpdb->get_results( "SELECT * FROM `wp_usermeta` WHERE `meta_key` LIKE 'birthdate' AND `meta_value` RLIKE '".$currentMonthAndDay."'" );
     $counter = 1;
-    foreach($results as $result){
+    foreach($todayResults as $result){
         $content = $content .'<br>'. $counter.') Id utente: '.$result->user_id;
         $counter = $counter + 1;
     }
@@ -54,9 +54,32 @@ function birthday_user_checker()
     <div class="" > <h3> Ci sono <?php echo $counter-1; ?> utenti che compiono gli anni oggi! </h3> </div>
     <div class="" > <p> <?php echo $content; ?> </p> </div>
 
+    <?php
+
+    $tomorrowMonthAndDay = date("m-d", strtotime("+1 day"));
+
+    $tomorrowResults = $wpdb->get_results( "SELECT * FROM `wp_usermeta` WHERE `meta_key` LIKE 'birthdate' AND `meta_value` RLIKE '".$tomorrowMonthAndDay."'" );
+    $counter = 1;
+
+
+    foreach($tomorrowResults as $result){
+        $tommorrowUsers = $tomorrowUsers .'<br>'. $counter.') Id utente: '.$result->user_id;
+        $counter = $counter + 1;
+    }
+
+    ?>
     <div class="wrap">
-        <h2>Nel corso della prossima settimana i seguenti utenti compieranno gli anni.</h2>
+        <div class="" > <h3> Ci sono <?php echo $counter-1; ?> utenti che compiono gli anni domani! </h3> </div>
+
     </div>
+    <div class="" > <p> <?php echo $tommorrowUsers; ?> </p> </div>
+    <?php
+
+
+
+    ?>
+
+
     <?php
 
 }
